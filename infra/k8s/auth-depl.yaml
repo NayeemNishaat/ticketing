@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: nayeemnishaat/auth
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: 250m
+---
+apiVersion: v1
+kind: Service
+# Type is not defined, so it will be ClusterIP by default
+metadata:
+  name: auth-svc
+spec:
+  selector:
+    app: auth
+  ports:
+    - name: auth
+      protocol: TCP
+      port: 3000 # Host
+      targetPort: 3000 # Pod
