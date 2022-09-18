@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - host: ticketing.dev # Add localhost/minikube ip to the etc/hosts file -> 192.168.49.2    ticketing.dev
+    - host: ticketing.dev # Add localhost/minikube ip (minikube ip) to the etc/hosts file -> 192.168.49.2    ticketing.dev
       http:
         paths:
           - path: /api/users/?(.*)
