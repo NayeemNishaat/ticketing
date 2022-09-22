@@ -23,6 +23,8 @@ router.post(
 
     console.log("Creating a user...");
 
+    throw new Error("Error connecting to database");
+
     res.send({});
   }
 );
