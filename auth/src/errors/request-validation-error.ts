@@ -1,5 +1,16 @@
 import { ValidationError } from "express-validator";
 
+// Remark: Ideally this should be in a different file
+// Part: Using Interface another option is to use an Abstract Class
+// interface customError {
+//   statusCode: number;
+//   serializeErrors(): {
+//     message: string;
+//     field?: string;
+//   }[];
+// }
+
+// export class RequestValidationError extends Error implements customError {
 export class RequestValidationError extends Error {
   statusCode = 400;
   // errors: ValidationError[];
