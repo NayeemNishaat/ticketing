@@ -1,9 +1,11 @@
-export class DatabaseConnectionError extends Error {
+import { CustomError } from "./custom-error";
+
+export class DatabaseConnectionError extends CustomError {
   reason = "Error connecting to database"; // Note: Available as ob.reason
   statusCode = 500;
 
   constructor() {
-    super();
+    super("Error connecting to database");
 
     Object.setPrototypeOf(this, DatabaseConnectionError.prototype);
   }
