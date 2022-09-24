@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-mongo-depl
+  # labels:
+  #   app: auth-mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-mongo
+  template:
+    metadata:
+      labels:
+        app: auth-mongo
+    spec:
+      containers:
+        - name: auth-mongo
+          image: mongo:latest # Important: If imagePull error occurs try to pull the image manually in the appropriate docker context. Note: Container creation error can occur if resources are too low.
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: 250m
+          # ports:
+          #   - containerPort: 27017
+          # volumeMounts:
+          #   - name: auth-mongo-persistent-storage
+          #     mountPath: /data/db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-mongo-svc
+spec:
+  selector:
+    app: auth-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017 # Host
+      targetPort: 27017 # Pod
