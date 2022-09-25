@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { Password } from "../services/password";
 
 // Note: An interface that describes the properties that are required to create a new User
 interface userAttrs {
@@ -29,6 +30,15 @@ const userSchema = new mongoose.Schema({
     required: true
   }
 });
+
+userSchema.pre("save", async function (done) {
+  if (this.isModified("password")) {
+    // Note: isModified is true when the password is changed/created else false.
+    const hashed = await Password.toHash(this.get("password"));
+    this.set("password", hashed);
+  }
+  done();
+}); // Note: Using function instead of arrow function because we need to use 'this' keyword to point to user document not the current context.
 
 // Note: For type checking we will use this static method
 userSchema.statics.build = (attrs: userAttrs) => {
