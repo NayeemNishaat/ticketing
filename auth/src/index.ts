@@ -1,6 +1,7 @@
 import express from "express";
 import "express-async-errors"; // Note: This is a package that allows us to throw errors inside async functions and it will be automatically caught by the global error handler middleware. Only need to importonce before creating the "app"!
 import mongoose from "mongoose";
+import cookieSession from "cookie-session";
 
 import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
@@ -10,7 +11,9 @@ import { errorHandler } from "./middlewares/error-handler";
 import { NotFoundError } from "./errors/not-found-error";
 
 const app = express();
+app.set("trust proxy", true); // Note: Traffic is being proxied to our application through ingress-nginx. Hence bt default express doen't trust proxied https connection. That's why we are saying express to trust proxy.
 app.use(express.json());
+app.use(cookieSession({ signed: false, secure: true }));
 
 app.use(currentUserRouter);
 app.use(signinRouter);
