@@ -28,7 +28,7 @@ app.all("*", async (_req, _res, next) => {
 app.use(errorHandler);
 
 const start = async () => {
-  if (!process.env.JWT_KEY) throw new Error("JWT_KEY is not defined.");
+  if (!process.env.JWT_KEY) throw new Error("JWT_KEY is not defined."); // Important: This error will never reach to the client because it's not originated in between request-respponse cycle.
 
   try {
     await mongoose.connect("mongodb://auth-mongo-svc:27017/auth"); // Note: "auth-mongo-svc" is the service name/cluster ip and "27017" is the port for the cluster ip service and "auth" is the db name.
