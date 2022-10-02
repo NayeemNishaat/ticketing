@@ -19,7 +19,7 @@ spec:
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
-                  name: jwt-secret
+                  name: ticketing-secrets
                   key: JWT_KEY
           resources:
             limits:
