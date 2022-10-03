@@ -12,7 +12,9 @@ import { NotFoundError } from "./errors/not-found-error";
 const app = express();
 app.set("trust proxy", true); // Note: Traffic is being proxied to our application through ingress-nginx. Hence bt default express doen't trust proxied https connection. That's why we are saying express to trust proxy.
 app.use(express.json());
-app.use(cookieSession({ signed: false, secure: true }));
+app.use(
+  cookieSession({ signed: false, secure: process.env.NODE_ENV !== "test" })
+);
 
 app.use(currentUserRouter);
 app.use(signinRouter);
