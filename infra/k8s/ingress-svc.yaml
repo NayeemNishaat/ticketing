@@ -8,6 +8,8 @@ metadata:
 spec:
   rules:
     - host: ticketing.dev # Add localhost/minikube ip (minikube ip) to the etc/hosts file -> 192.168.49.2    ticketing.dev
+      # In Mac -> 127.0.0.1 ticketing.dev
+      # Important: Don't forget to install the ingress-nginx addon -> kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.4.0/deploy/static/provider/cloud/deploy.yaml
       http:
         paths:
           - path: /api/users/?(.*)
