@@ -16,3 +16,11 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: . # Note: dest: . means sync the src: "src/**/*.ts" files inside the running container's corresponding path.
+    - image: nayeemnishaat/client
+      context: ./client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "**/*.js"
+            dest: .
