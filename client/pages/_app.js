@@ -5,7 +5,7 @@ const App = ({ Component, pageProps }) => {
 };
 
 // App.getInitialProps = async () => {
-//   console.log("sjhfgvhb");
+//   console.log("sjhfgvhb"); // Important: This will be executed for all the pages. A good place to call the auth service.
 //   return {};
 // };
 
