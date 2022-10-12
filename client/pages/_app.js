@@ -1,5 +1,12 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export default ({ Component, pageProps }) => {
+const App = ({ Component, pageProps }) => {
   return <Component {...pageProps} />;
 };
+
+// App.getInitialProps = async () => {
+//   console.log("sjhfgvhb");
+//   return {};
+// };
+
+export default App;
