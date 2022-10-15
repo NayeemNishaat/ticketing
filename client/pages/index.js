@@ -1,6 +1,7 @@
 import axios from "axios";
 
 function LandingPage({ currentUser }) {
+  console.log(currentUser);
   return <div>Landing Page</div>;
 }
 
@@ -16,8 +17,19 @@ LandingPage.getInitialProps = async () => {
 
   if (typeof window === "undefined") {
     // Key: We are on the server
+    const { data } = await axios.get(
+      "http://ingress-nginx.ingress-nginx.svc.cluster.local/api/users/currentuser",
+      {
+        headers: {
+          Host: "ticketing.dev"
+        }
+      }
+    );
+    return data;
   } else {
     // Key: We are on the browser
+    const { data } = await axios.get("/api/users/currentuser");
+    return data;
   }
 
   return {};
