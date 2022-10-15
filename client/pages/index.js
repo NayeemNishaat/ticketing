@@ -1,11 +1,11 @@
-import axios from "axios";
+import buildClient from "../api/build-client";
 
 function LandingPage({ currentUser }) {
   console.log(currentUser);
   return <div>Landing Page</div>;
 }
 
-LandingPage.getInitialProps = async ({ req }) => {
+LandingPage.getInitialProps = async (context) => {
   // Important: `getInitialProps` Executed in the server when we visit/refresh the page.
   // Important: `getInitialProps` Executed in the client when we have already mounted the page on the client and navigate to the page somehow without revisiting/refreshing the page.
   // Note: To check if user is logged in or not the request is required to made in this serverside component.
@@ -15,20 +15,8 @@ LandingPage.getInitialProps = async ({ req }) => {
   // Note: kubectl get namespace -> Get all namespaces
   // Note: kubectl get services -n ingress-nginx -> Get all services of ingress-nginx namespace.
 
-  if (typeof window === "undefined") {
-    // Key: We are on the server
-    const { data } = await axios.get(
-      "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/currentuser",
-      {
-        headers: req.headers
-      }
-    );
-    return data;
-  } else {
-    // Key: We are on the browser
-    const { data } = await axios.get("/api/users/currentuser");
-    return data;
-  }
+  const { data } = await buildClient(context).get("/api/users/currentuser");
+  return data;
 };
 
 export default LandingPage;
