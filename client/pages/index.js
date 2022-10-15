@@ -19,6 +19,7 @@ LandingPage.getInitialProps = async (context) => {
   // Note: kubectl get services -n ingress-nginx -> Get all services of ingress-nginx namespace.
 
   const { data } = await buildClient(context).get("/api/users/currentuser");
+  console.log("Landing");
   return data;
 };
 
