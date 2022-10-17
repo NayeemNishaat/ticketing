@@ -1,13 +1,12 @@
 import express from "express";
 import "express-async-errors"; // Note: This is a package that allows us to throw errors inside async functions and it will be automatically caught by the global error handler middleware. Only need to importonce before creating the "app"!
 import cookieSession from "cookie-session";
+import { errorHandler, NotFoundError } from "@labyrinth-inc/ticketing-sdk";
 
 import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
 import { signupRouter } from "./routes/signup";
 import { signoutRouter } from "./routes/signout";
-import { errorHandler } from "./middlewares/error-handler";
-import { NotFoundError } from "./errors/not-found-error";
 
 const app = express();
 app.set("trust proxy", true); // Note: Traffic is being proxied to our application through ingress-nginx. Hence bt default express doen't trust proxied https connection. That's why we are saying express to trust proxy.
