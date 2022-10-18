@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ticket-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ticket
+  template:
+    metadata:
+      labels:
+        app: ticket
+    spec:
+      containers:
+        - name: ticket
+          image: nayeemnishaat/ticket
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ticketing-secrets
+                  key: JWT_KEY
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: 250m
+---
+apiVersion: v1
+kind: Service
+# Type is not defined, so it will be ClusterIP by default
+metadata:
+  name: ticket-svc
+spec:
+  selector:
+    app: ticket
+  ports:
+    - name: ticket
+      protocol: TCP
+      port: 3000 # Host
+      targetPort: 3000 # Pod
