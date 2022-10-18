@@ -1,5 +1,5 @@
 auth/node_modules
 client/node_modules
-tickets/node_modules
+ticket/node_modules
 auth/dist
 .DS_Store
