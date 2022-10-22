@@ -1,7 +1,11 @@
 import express from "express";
 import "express-async-errors"; // Note: This is a package that allows us to throw errors inside async functions and it will be automatically caught by the global error handler middleware. Only need to importonce before creating the "app"!
 import cookieSession from "cookie-session";
-import { errorHandler, NotFoundError } from "@labyrinth-inc/ticketing-sdk";
+import {
+  errorHandler,
+  NotFoundError,
+  currentUser
+} from "@labyrinth-inc/ticketing-sdk";
 import { createTicketRouter } from "./routes/new";
 
 const app = express();
@@ -10,6 +14,8 @@ app.use(express.json());
 app.use(
   cookieSession({ signed: false, secure: process.env.NODE_ENV !== "test" })
 );
+app.use(currentUser);
+
 app.use(createTicketRouter);
 
 app.all("*", async (_req, _res, next) => {
