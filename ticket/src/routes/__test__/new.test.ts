@@ -1,4 +1,5 @@
 import request from "supertest";
+import { Ticket } from "../../models/ticket";
 import { app } from "../../app";
 
 // Note: TDD Approach
@@ -61,10 +62,21 @@ it("returns an error if an invalid price is provided", async () => {
 });
 
 it("creates a ticket with valid inputs", async () => {
-  // Note: Add a check to make sure a ticket was saved in the db
+  let tickets = await Ticket.find({});
+
+  expect(tickets.length).toEqual(0);
+
+  const title = "asjdhfjksdhf";
 
   await request(app)
     .post("/api/ticket")
-    .send({ title: "afddg dsv", price: 12.35 })
+    .set("Cookie", global.signin())
+    .send({ title, price: 12.35 })
     .expect(201);
+
+  tickets = await Ticket.find({});
+
+  expect(tickets.length).toEqual(1);
+  expect(tickets[0].price).toEqual(12.35);
+  expect(tickets[0].title).toEqual(title);
 });
