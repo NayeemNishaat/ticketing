@@ -22,8 +22,42 @@ it("returns a status other than 401 if the use is signed in", async () => {
   expect(res.status).not.toEqual(401);
 });
 
-it("returns an error if an invalid title is provided", async () => {});
+it("returns an error if an invalid title is provided", async () => {
+  await request(app)
+    .post("/api/ticket")
+    .set("Cookie", global.signin())
+    .send({
+      title: "",
+      price: 10
+    })
+    .expect(400);
 
-it("returns an error if an invalid price is provided", async () => {});
+  await request(app)
+    .post("/api/ticket")
+    .set("Cookie", global.signin())
+    .send({
+      price: 10
+    })
+    .expect(400);
+});
+
+it("returns an error if an invalid price is provided", async () => {
+  await request(app)
+    .post("/api/ticket")
+    .set("Cookie", global.signin())
+    .send({
+      title: "tjhbn dfjdh",
+      price: -100
+    })
+    .expect(400);
+
+  await request(app)
+    .post("/api/ticket")
+    .set("Cookie", global.signin())
+    .send({
+      title: "xjv dgjsii"
+    })
+    .expect(400);
+});
 
 it("creates a ticket with valid inputs", async () => {});

@@ -1,10 +1,22 @@
 import express, { Request, Response } from "express";
-import { requireAuth } from "@labyrinth-inc/ticketing-sdk";
+import { body } from "express-validator";
+import { requireAuth, validateRequest } from "@labyrinth-inc/ticketing-sdk";
 
 const router = express.Router();
 
-router.post("/api/ticket", requireAuth, (req: Request, res: Response) => {
-  res.sendStatus(200);
-});
+router.post(
+  "/api/ticket",
+  requireAuth,
+  [
+    body("title").not().isEmpty().withMessage("Title is required"),
+    body("price")
+      .isFloat({ gt: 0 })
+      .withMessage("Price is required and must be greater than 0.")
+  ],
+  validateRequest,
+  (req: Request, res: Response) => {
+    res.sendStatus(200);
+  }
+);
 
 export { router as createTicketRouter };
