@@ -60,4 +60,11 @@ it("returns an error if an invalid price is provided", async () => {
     .expect(400);
 });
 
-it("creates a ticket with valid inputs", async () => {});
+it("creates a ticket with valid inputs", async () => {
+  // Note: Add a check to make sure a ticket was saved in the db
+
+  await request(app)
+    .post("/api/ticket")
+    .send({ title: "afddg dsv", price: 12.35 })
+    .expect(201);
+});
