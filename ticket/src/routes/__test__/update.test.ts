@@ -29,7 +29,7 @@ it("returns a 401 if the user is not authenticated", async () => {
 
 it("returns a 401 if the user does not own the ticket", async () => {
   const response = await request(app)
-    .post("/api/tickets")
+    .post("/api/ticket")
     .set("Cookie", global.signin())
     .send({
       title: "title",
@@ -37,7 +37,7 @@ it("returns a 401 if the user does not own the ticket", async () => {
     });
 
   await request(app)
-    .put(`/api/tickets/${response.body.id}`)
+    .put(`/api/ticket/${response.body.id}`)
     .set("Cookie", global.signin())
     .send({
       title: "title2",
@@ -50,7 +50,7 @@ it("returns a 400 if the user provides an invalid title or price", async () => {
   const cookie = global.signin();
 
   const response = await request(app)
-    .post("/api/tickets")
+    .post("/api/ticket")
     .set("Cookie", cookie)
     .send({
       title: "title",
@@ -58,7 +58,7 @@ it("returns a 400 if the user provides an invalid title or price", async () => {
     });
 
   await request(app)
-    .put(`/api/tickets/${response.body.id}`)
+    .put(`/api/ticket/${response.body.id}`)
     .set("Cookie", cookie)
     .send({
       title: "",
@@ -67,7 +67,7 @@ it("returns a 400 if the user provides an invalid title or price", async () => {
     .expect(400);
 
   await request(app)
-    .put(`/api/tickets/${response.body.id}`)
+    .put(`/api/ticket/${response.body.id}`)
     .set("Cookie", cookie)
     .send({
       title: "title2",
@@ -80,7 +80,7 @@ it("updates the ticket provided valid inputs", async () => {
   const cookie = global.signin();
 
   const response = await request(app)
-    .post("/api/tickets")
+    .post("/api/ticket")
     .set("Cookie", cookie)
     .send({
       title: "title",
@@ -88,7 +88,7 @@ it("updates the ticket provided valid inputs", async () => {
     });
 
   await request(app)
-    .put(`/api/tickets/${response.body.id}`)
+    .put(`/api/ticket/${response.body.id}`)
     .set("Cookie", cookie)
     .send({
       title: "title2",
@@ -97,7 +97,7 @@ it("updates the ticket provided valid inputs", async () => {
     .expect(200);
 
   const ticketResponse = await request(app)
-    .get(`/api/tickets/${response.body.id}`)
+    .get(`/api/ticket/${response.body.id}`)
     .send();
 
   expect(ticketResponse.body.title).toEqual("title2");
