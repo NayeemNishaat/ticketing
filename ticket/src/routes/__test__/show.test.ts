@@ -1,8 +1,10 @@
 import request from "supertest";
+import mongoose from "mongoose";
 import { app } from "../../app";
 
 it("returns a 404 if the ticket is not found", async () => {
-  const res = await request(app).get("/api/ticket/dfdyuj").send().expect(404);
+  const id = new mongoose.Types.ObjectId().toHexString();
+  const res = await request(app).get(`/api/ticket/${id}`).send().expect(404);
 
   // console.log(res.body); // Remark: This line will be invoked if the test passes or if we remove the expectation.
 });
