@@ -7,6 +7,7 @@ import {
   currentUser
 } from "@labyrinth-inc/ticketing-sdk";
 import { createTicketRouter } from "./routes/new";
+import { showTicketRooter } from "./routes/show";
 
 const app = express();
 app.set("trust proxy", true); // Note: Traffic is being proxied to our application through ingress-nginx. Hence bt default express doen't trust proxied https connection. That's why we are saying express to trust proxy.
@@ -17,6 +18,7 @@ app.use(
 app.use(currentUser);
 
 app.use(createTicketRouter);
+app.use(showTicketRooter);
 
 app.all("*", async (_req, _res, next) => {
   // next(new NotFoundError()); // Note: For throwing async errors
