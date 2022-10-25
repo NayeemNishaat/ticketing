@@ -91,15 +91,13 @@ it("updates the ticket provided valid inputs", async () => {
     .put(`/api/ticket/${response.body.id}`)
     .set("Cookie", cookie)
     .send({
-      title: "title2",
+      title: "another one",
       price: 30
     })
     .expect(200);
 
-  const ticketResponse = await request(app)
-    .get(`/api/ticket/${response.body.id}`)
-    .send();
+  const res = await request(app).get(`/api/ticket/${response.body.id}`).send();
 
-  expect(ticketResponse.body.title).toEqual("title2");
-  expect(ticketResponse.body.price).toEqual(30);
+  expect(res.body.title).toEqual("another one");
+  expect(res.body.price).toEqual(30);
 });
