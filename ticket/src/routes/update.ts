@@ -11,7 +11,7 @@ import { Ticket } from "../models/ticket";
 const router = express.Router();
 
 router.put(
-  "/api/ticket/:id",
+  "/api/tickets/:id",
   requireAuth,
   [
     body("title").not().isEmpty().withMessage("Title is required"),
