@@ -1,3 +1,6 @@
 [submodule "ticketing-sdk"]
 	path = ticketing-sdk
 	url = https://github.com/NayeemNishaat/ticketing-sdk.git
+[submodule "nats-streaming-server"]
+	path = nats-streaming-server
+	url = ./nats-streaming-server
