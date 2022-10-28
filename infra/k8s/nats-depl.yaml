@@ -15,17 +15,16 @@ spec:
       containers:
         - name: nats
           image: nats-streaming:0.17.0
-          args:
-            [
+          args: [
               "-p",
               "4222",
               "-m",
               "8222",
-              "-hbi",
+              "-hbi", # heartbeat interval -> NATS will send health check requests to clients in every 5 seconds
               "5s",
-              "-hbt",
+              "-hbt", # heartbeat timeout -> client has 5s to respond to heartbeat, otherwise it is considered temporary dead
               "5s",
-              "-hbf",
+              "-hbf", # heartbeat fail after -> after 2 failed heartbeats, client is considered permanently dead
               "2",
               "-SD",
               "-cid",
