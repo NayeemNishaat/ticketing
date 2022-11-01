@@ -10,6 +10,11 @@ const start = async () => {
   try {
     await natsWrapper.connect("ticketing", "hjijdjf", "http://nats-svc:4222");
 
+    natsWrapper.client.on("close", () => {
+      console.log("NATS connection closed!");
+      process.exit();
+    });
+
     await mongoose.connect(process.env.MONGO_URI);
     console.log("MongoDB Online (ticket svc)");
   } catch (error) {
@@ -19,6 +24,9 @@ const start = async () => {
   app.listen(3000, () => {
     console.log("Listening on port 3000 (ticket svc)");
   });
+
+  process.on("SIGINT", () => natsWrapper.client.close());
+  process.on("SIGTERM", () => natsWrapper.client.close());
 };
 start();
 
