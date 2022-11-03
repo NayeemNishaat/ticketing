@@ -27,6 +27,7 @@ router.post(
     });
 
     await ticket.save();
+
     await new TicketCreatedPublisher(natsWrapper.client).publish({
       // Remark: client is a getter. So we can't call it.
       id: ticket.id,
