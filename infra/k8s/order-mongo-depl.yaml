@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-mongo-depl
+  # labels:
+  #   app: order-mongo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-mongo
+  template:
+    metadata:
+      labels:
+        app: order-mongo
+    spec:
+      containers:
+        - name: order-mongo
+          image: mongo # Important: If imagePull error occurs try to pull the image manually in the appropriate docker context. Note: Container creation error can occur if resources are too low.
+          # Important: If cannot change context use minikube.exe image load mongo for loading the image into the minikube context manually.
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: 250m
+          # ports:
+          #   - containerPort: 27017
+          # volumeMounts:
+          #   - name: order-mongo-persistent-storage
+          #     mountPath: /data/db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-mongo-svc
+spec:
+  selector:
+    app: order-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017 # Host
+      targetPort: 27017 # Pod

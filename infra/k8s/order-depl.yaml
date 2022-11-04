@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+        - name: order
+          image: nayeemnishaat/order
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: "http://nats-svc:4222"
+            - name: NATS_CLUSTER_ID
+              value: ticketing
+            - name: MONGO_URI
+              value: "mongodb://order-mongo-svc:27017/order"
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ticketing-secrets
+                  key: JWT_KEY
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: 250m
+---
+apiVersion: v1
+kind: Service
+# Type is not defined, so it will be ClusterIP by default
+metadata:
+  name: order-svc
+spec:
+  selector:
+    app: order
+  ports:
+    - name: order
+      protocol: TCP
+      port: 3000 # Host
+      targetPort: 3000 # Pod
