@@ -32,3 +32,11 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: nayeemnishaat/order
+      context: ./order
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .

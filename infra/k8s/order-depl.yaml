@@ -1,3 +1,4 @@
+# Important: Always build the new image before running skaffold.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
