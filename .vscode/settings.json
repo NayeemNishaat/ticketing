@@ -1,0 +1,5 @@
+{
+  "yaml.schemas": {
+    "https://raw.githubusercontent.com/GoogleContainerTools/skaffold/master/docs/content/en/schemas/v2beta29.json": "file:///Users/labyrinth/Developer/Projects/ticketing/skaffold.yaml"
+  }
+}
