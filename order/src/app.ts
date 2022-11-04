@@ -6,10 +6,10 @@ import {
   NotFoundError,
   currentUser
 } from "@labyrinth-inc/ticketing-sdk";
-import { createTicketRouter } from "./routes/new";
-import { showTicketRooter } from "./routes/show";
-import { indexTicketRooter } from "./routes/index";
-import { updateTicketRouter } from "./routes/update";
+import { deleteOrderRouter } from "./routes/delete";
+import { showOrderRouter } from "./routes/show";
+import { indexOrderRouter } from "./routes/index";
+import { newOrderRouter } from "./routes/new";
 
 const app = express();
 app.set("trust proxy", true); // Note: Traffic is being proxied to our application through ingress-nginx. Hence bt default express doen't trust proxied https connection. That's why we are saying express to trust proxy.
@@ -19,10 +19,10 @@ app.use(
 );
 app.use(currentUser);
 
-app.use(createTicketRouter);
-app.use(showTicketRooter);
-app.use(indexTicketRooter);
-app.use(updateTicketRouter);
+app.use(deleteOrderRouter);
+app.use(showOrderRouter);
+app.use(indexOrderRouter);
+app.use(newOrderRouter);
 
 app.all("*", async (_req, _res, next) => {
   // next(new NotFoundError()); // Note: For throwing async errors

@@ -25,13 +25,13 @@ const start = async () => {
     });
 
     await mongoose.connect(process.env.MONGO_URI);
-    console.log("MongoDB Online (ticket svc)");
+    console.log("MongoDB Online (order svc)");
   } catch (error) {
     console.error(error);
   }
 
   app.listen(3000, () => {
-    console.log("Listening on port 3000 (ticket svc)");
+    console.log("Listening on port 3000 (order svc)");
   });
 
   process.on("SIGINT", () => natsWrapper.client.close());
