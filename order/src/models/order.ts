@@ -26,9 +26,7 @@ const orderSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      required: true,
-      enum: ["created", "cancelled", "awaiting:payment", "complete"],
-      default: "created"
+      required: true
     },
     expiresAt: {
       type: mongoose.Schema.Types.Date
