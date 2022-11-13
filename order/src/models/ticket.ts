@@ -20,10 +20,6 @@ interface TicketModel extends mongoose.Model<TicketDoc> {
 
 const ticketSchema = new mongoose.Schema(
   {
-    id: {
-      type: mongoose.Types.ObjectId,
-      required: true
-    },
     title: {
       type: String,
       required: true
