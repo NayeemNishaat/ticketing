@@ -28,7 +28,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@labyrinth-inc/ticketing-sdk": "^1.0.8",
+    "@labyrinth-inc/ticketing-sdk": "^1.0.13",
     "@types/cookie-session": "^2.0.44",
     "@types/express": "^4.17.14",
     "@types/jsonwebtoken": "^8.5.9",
