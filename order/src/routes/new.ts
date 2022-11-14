@@ -58,11 +58,12 @@ router.post(
       id: order.id,
       status: order.status,
       userId: order.userId,
-      expiresAt: order.expiresAt.toISOString(), // Important: Convert to UTC time string always when dealing with date/time
+      expiresAt: order.expiresAt.toISOString(),
       ticket: {
         id: ticket.id,
         price: ticket.price
-      }
+      },
+      version: order.version
     });
 
     res.status(201).send(order);
