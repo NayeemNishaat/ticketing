@@ -18,6 +18,11 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
 
     const { title, price } = data;
     ticket.set({ title, price });
+
+    // Segment: Independent from "mongoose-update-if-current" package
+    // const { title, price, version } = data;
+    // ticket.set({ title, price, version });
+
     await ticket.save();
 
     msg.ack();

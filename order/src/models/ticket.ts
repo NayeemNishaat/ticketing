@@ -51,6 +51,17 @@ const ticketSchema = new mongoose.Schema(
 ticketSchema.set("versionKey", "version");
 ticketSchema.plugin(updateIfCurrentPlugin);
 
+// Segment: Independent from "mongoose-update-if-current" package
+// ticketSchema.plugin(updateIfCurrentPlugin);
+// ticketSchema.pre("save", function (done) {
+//   // @ts-ignore
+//   this.$where = {
+//     version: this.get("version") - 1
+//   };
+
+//   done();
+// });
+
 ticketSchema.methods.isReserved = async function () {
   const existingOrder = await Order.findOne({
     ticket: this,
