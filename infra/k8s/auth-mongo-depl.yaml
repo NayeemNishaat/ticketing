@@ -17,7 +17,7 @@ spec:
       containers:
         - name: auth-mongo
           image: mongo # Important: If imagePull error occurs try to pull the image manually in the appropriate docker context. Note: Container creation error can occur if resources are too low.
-          # Important: If cannot change context use minikube.exe image load mongo for loading the image into the minikube context manually.
+          # Important: If cannot change context use, minikube.exe image load mongo for loading the image into the minikube context manually.
           imagePullPolicy: IfNotPresent
           resources:
             limits:
