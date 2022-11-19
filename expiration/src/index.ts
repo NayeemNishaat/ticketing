@@ -13,6 +13,7 @@ const start = async () => {
       process.env.NATS_CLIENT_ID,
       process.env.NATS_URL
     );
+    console.log("Connected to NATS (expiration svc)");
 
     natsWrapper.client.on("close", () => {
       console.log("NATS connection closed!");
