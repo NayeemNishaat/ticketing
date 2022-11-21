@@ -48,3 +48,11 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: nayeemnishaat/payment
+      context: ./payment
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .

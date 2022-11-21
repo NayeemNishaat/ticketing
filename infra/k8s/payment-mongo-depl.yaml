@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-mongo
+  template:
+    metadata:
+      labels:
+        app: payment-mongo
+    spec:
+      containers:
+        - name: payment-mongo
+          image: mongo
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits:
+              memory: 500Mi
+              cpu: 250m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-mongo-svc
+spec:
+  selector:
+    app: payment-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017 # Host
+      targetPort: 27017 # Pod

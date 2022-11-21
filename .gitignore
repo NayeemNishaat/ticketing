@@ -3,5 +3,6 @@ client/node_modules
 ticket/node_modules
 order/node_modules
 expiration/node_modules
+payment/node_modules
 auth/dist
 .DS_Store
