@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { OrderStatus } from "@labyrinth-inc/ticketing-sdk";
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
 interface OrderAttrs {
   id: string;
@@ -45,8 +46,12 @@ const orderSchema = new mongoose.Schema(
         delete ret._id;
       }
     }
+    // optimisticConcurrency: true
   }
 );
+
+orderSchema.set("versionKey", "version");
+orderSchema.plugin(updateIfCurrentPlugin);
 
 orderSchema.statics.build = (attrs: OrderAttrs) => {
   return new Order({
