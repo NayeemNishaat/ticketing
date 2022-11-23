@@ -29,8 +29,6 @@ router.post(
 
     if (order.status === OrderStatus.Cancelled)
       throw new BadRequestError("Cannot pay for a cancelled order");
-    console.log(token);
-    console.log(process.env.STRIPE_KEY);
 
     await stripe.charges.create({
       currency: "usd",
