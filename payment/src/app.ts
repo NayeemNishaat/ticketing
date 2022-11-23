@@ -6,6 +6,7 @@ import {
   NotFoundError,
   currentUser
 } from "@labyrinth-inc/ticketing-sdk";
+import { createChargeRouter } from "./routes/new";
 
 const app = express();
 app.set("trust proxy", true); // Note: Traffic is being proxied to our application through ingress-nginx. Hence bt default express doen't trust proxied https connection. That's why we are saying express to trust proxy.
@@ -14,6 +15,8 @@ app.use(
   cookieSession({ signed: false, secure: process.env.NODE_ENV !== "test" })
 );
 app.use(currentUser);
+
+app.use(createChargeRouter);
 
 app.all("*", async (_req, _res, next) => {
   // next(new NotFoundError()); // Note: For throwing async errors
