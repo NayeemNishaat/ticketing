@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import { Order } from "../../models/order";
 import { OrderStatus } from "@labyrinth-inc/ticketing-sdk";
 import { stripe } from "../../stripe"; // Note: Original module path
+import { Payment } from "../../models/payment";
 
 // jest.mock("../../stripe"); // Note: Original module path
 
@@ -93,4 +94,11 @@ it("returns a 201 with valid inputs", async () => {
   // expect(chargeOptions.source).toEqual("tok_visa");
   // expect(chargeOptions.amount).toEqual(20 * 100);
   // expect(chargeOptions.currency).toEqual("usd");
+
+  const payment = await Payment.findOne({
+    orderId: order.id,
+    stripeId: stripeCharge?.id
+  });
+
+  expect(payment).not.toBeNull();
 });
