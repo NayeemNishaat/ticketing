@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import { Order } from "../../models/order";
 import { OrderStatus } from "@labyrinth-inc/ticketing-sdk";
 
+jest.mock("../../stripe"); // Note: Original module path
+
 it("returns a 404 when purchasing an order that does not exist", async () => {
   await request(app)
     .post("/api/payment")
