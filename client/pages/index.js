@@ -1,4 +1,4 @@
-import buildClient from "../api/build-client";
+// import buildClient from "../api/build-client";
 
 function LandingPage({ currentUser }) {
   return currentUser ? (
@@ -8,7 +8,7 @@ function LandingPage({ currentUser }) {
   );
 }
 
-LandingPage.getInitialProps = async (context) => {
+LandingPage.getInitialProps = async (_context, _client, _currentUser) => {
   // Important: `getInitialProps` Executed in the server when we visit/refresh the page.
   // Important: `getInitialProps` Executed in the client when we have already mounted the page on the client and navigate to the page somehow without revisiting/refreshing the page.
   // Note: To check if user is logged in or not the request is required to made in this serverside component.
@@ -17,9 +17,9 @@ LandingPage.getInitialProps = async (context) => {
   // Important: For communication between pods in different nameshapeces the url will be -> http://nameOfTheService.nameOfThenamespace.svc.cluster.local/api/users/currentuser
   // Note: kubectl get namespace -> Get all namespaces
   // Note: kubectl get services -n ingress-nginx -> Get all services of ingress-nginx namespace.
-
-  const { data } = await buildClient(context).get("/api/users/currentuser");
-  return data;
+  // const { data } = await buildClient(context).get("/api/users/currentuser");
+  // return data;
+  return {};
 };
 
 export default LandingPage;
