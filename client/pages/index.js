@@ -1,3 +1,4 @@
+import Link from "next/link";
 // import buildClient from "../api/build-client";
 
 function LandingPage({ currentUser, tickets }) {
@@ -9,6 +10,7 @@ function LandingPage({ currentUser, tickets }) {
           <tr>
             <th>Title</th>
             <th>Price</th>
+            <th>Link</th>
           </tr>
         </thead>
         <tbody>
@@ -16,6 +18,11 @@ function LandingPage({ currentUser, tickets }) {
             <tr key={ticket.id}>
               <td>{ticket.title}</td>
               <td>{ticket.price}</td>
+              <td>
+                <Link href="/ticket/[ticketId]" as={`/ticket/${ticket.id}`}>
+                  <a>View</a>
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
