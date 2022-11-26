@@ -12,10 +12,14 @@ const OrderShow = ({ order }) => {
     findTimeLeft();
     const timerId = setInterval(findTimeLeft, 1000);
 
+    if (timeLeft < 0) clearInterval(timerId);
+
     return () => {
       clearInterval(timerId);
     };
   }, [order]);
+
+  if (timeLeft < 0) return <h1>Order Expired</h1>;
 
   return (
     <>
