@@ -11,7 +11,7 @@ const OrderShow = ({ order, currentUser }) => {
     body: {
       orderId: order.id
     },
-    onSuccess: (_payment) => Router.replace("/")
+    onSuccess: (_payment) => Router.replace("/order")
   });
 
   useEffect(() => {
