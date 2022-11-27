@@ -9,3 +9,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: cd auth && npm i && npm run test:ci
+      # - run: cd auth && npm i && npm run test:ci # Note: Here we can put multiple steps to run sequentially or create         new file to run them parallelly!
