@@ -16,10 +16,10 @@ spec:
         - name: client
           image: nayeemnishaat/client
           imagePullPolicy: IfNotPresent
-          resources:
-            limits:
-              memory: 1Gi
-              cpu: 500m
+          # resources:
+          #   limits:
+          #     memory: 2Gi
+          #     cpu: 500m
 ---
 apiVersion: v1
 kind: Service

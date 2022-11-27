@@ -16,10 +16,10 @@ spec:
         - name: expiration-redis
           image: redis # Note: Need to pull from docker hub manually
           imagePullPolicy: IfNotPresent
-          resources:
-            limits:
-              memory: 500Mi
-              cpu: 250m
+          # resources:
+          #   limits:
+          #     memory: 500Mi
+          #     cpu: 250m
 ---
 apiVersion: v1
 kind: Service

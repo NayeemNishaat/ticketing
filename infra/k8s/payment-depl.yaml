@@ -36,10 +36,10 @@ spec:
                 secretKeyRef:
                   name: ticketing-secrets
                   key: STRIPE_KEY
-          resources:
-            limits:
-              memory: 500Mi
-              cpu: 250m
+          # resources:
+          #   limits:
+          #     memory: 500Mi
+          #     cpu: 250m
 ---
 apiVersion: v1
 kind: Service
