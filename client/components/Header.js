@@ -4,6 +4,8 @@ function Header({ currentUser }) {
   const links = [
     !currentUser && { label: "Sign Up", href: "/auth/signup" },
     !currentUser && { label: "Sign In", href: "/auth/signin" },
+    currentUser && { label: "Post Ticket", href: "/ticket/new" },
+    currentUser && { label: "Orders", href: "/order" },
     currentUser && { label: "Sign Out", href: "/auth/signout" }
   ]
     .filter((linkConfig) => linkConfig)
@@ -20,7 +22,7 @@ function Header({ currentUser }) {
   return (
     <nav className="navbar navbar-light bg-light px-5">
       <Link href="/">
-        <a className="navbar-brand">GitTix</a>
+        <a className="navbar-brand">LabyTix</a>
       </Link>
 
       <div className="d-flex justify-content-end">
