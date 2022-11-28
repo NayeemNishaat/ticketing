@@ -1,3 +1,4 @@
 kubectl config view // Note: View config
 kubectl config use-context docker-desktop // Note: Switch context
 kubectl get nodes // Note: Get nodes (compute resources, a cluster has one or multiple nodes)
+kubectl logs <pod-name> // Note: Get logs from a pod
