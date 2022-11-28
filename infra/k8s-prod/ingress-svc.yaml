@@ -51,6 +51,7 @@ spec:
                   number: 3000
 ---
 # Note: For solving DGO ingress-nginx issue
+# Remark: For https -> cert-manager.io that provies the process to enable https for a kubernates cluster running with ingress-nginx
 apiVersion: v1
 kind: Service
 metadata:
