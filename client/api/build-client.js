@@ -6,6 +6,8 @@ export default ({ req }) => {
     return axios.create({
       baseURL:
         "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
+      // baseURL:
+      //   "http://www.live.domain/", // Note: For solving DGO ingress-nginx issue
       headers: req.headers
     });
   } else {
